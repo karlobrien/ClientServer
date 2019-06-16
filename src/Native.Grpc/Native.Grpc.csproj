@@ -16,5 +16,6 @@
 
   <ItemGroup>
     <Protobuf Include="helloworld.proto" Link="helloworld.proto" />
+        <Protobuf Include="simple.proto" Link="simple.proto" />
   </ItemGroup>
 </Project>
