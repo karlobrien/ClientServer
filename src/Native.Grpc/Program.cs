@@ -1,18 +1,10 @@
 ﻿using System;
-using System.Threading.Tasks;
 using Grpc.Core;
-using Helloworld;
+using MicrosoftChannels = System.Threading.Channels;
+using Simple;
 
 namespace Native.Grpc
 {
-    class GreeterImpl : Greeter.GreeterBase
-    {
-        // Server side handler of the SayHello RPC
-        public override Task<HelloReply> SayHello(HelloRequest request, ServerCallContext context)
-        {
-            return Task.FromResult(new HelloReply { Message = "Hello " + request.Name });
-        }
-    }
 
     class Program
     {
@@ -20,9 +12,15 @@ namespace Native.Grpc
 
         public static void Main(string[] args)
         {
+            var channel = MicrosoftChannels.Channel.CreateUnbounded<long>(new MicrosoftChannels.UnboundedChannelOptions()
+            {
+                SingleWriter = false,
+                SingleReader = true
+            });
+
             var server = new Server
             {
-                Services = { Greeter.BindService(new GreeterImpl()) },
+                Services = { Better.BindService(new SimpleImpl()) },
                 Ports = { new ServerPort("localhost", Port, ServerCredentials.Insecure) }
             };
             server.Start();
