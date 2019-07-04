@@ -9,6 +9,7 @@ namespace Native.Grpc
     {
         public override Task<BetResponse> PlaceBet(Bet bet, ServerCallContext context)
         {
+            Console.WriteLine("Request Received");
             return Task.FromResult(new BetResponse {
                 Id = 1, ClientId = 1, Status = BetResponse.Types.Status.Ack
             });

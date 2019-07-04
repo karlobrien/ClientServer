@@ -30,6 +30,9 @@ build/
 [Tt]est[Rr]esult*/
 [Bb]uild[Ll]og.*
 
+python/
+*.py
+*.pyc
 *_i.c
 *_p.c
 *.ilk
@@ -144,7 +147,7 @@ UpgradeLog*.htm
 *.txt~
 *.swp
 *.swo
- 
+
 # svn
 .svn
 
@@ -207,3 +210,6 @@ $RECYCLE.BIN/
 #####
 # End of core ignore list, below put you custom 'per project' settings (patterns or path)
 #####
+python/virtualenvironment/client_app/include/python2.7
+python/virtualenvironment/client_app/lib/python2.7/LICENSE.txt
+.ionide/symbolCache.db
