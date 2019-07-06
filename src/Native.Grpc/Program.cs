@@ -20,7 +20,7 @@ namespace Native.Grpc
 
             var server = new Server
             {
-                Services = { Better.BindService(new SimpleImpl()) },
+                Services = { Better.BindService(new BetServer()) },
                 Ports = { new ServerPort("localhost", Port, ServerCredentials.Insecure) }
             };
             server.Start();

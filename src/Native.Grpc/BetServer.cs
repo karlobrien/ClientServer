@@ -1,11 +1,11 @@
-using System;
+﻿using System;
 using System.Threading.Tasks;
 using Grpc.Core;
 using Simple;
 
 namespace Native.Grpc
 {
-    public class SimpleImpl : Better.BetterBase
+    public class BetServer : Better.BetterBase
     {
         public override Task<BetResponse> PlaceBet(Bet bet, ServerCallContext context)
         {
