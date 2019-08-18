@@ -16,21 +16,18 @@ namespace ClientGrpc
             var cts = new CancellationTokenSource();
             var client = new MessageServer.MessageServerClient(channel);
             var reply = await client.ClientConnectAsync(new Empty());
-            Console.WriteLine(reply.status);
 
-            // var client = new Better.BetterClient(channel);
-            // String user = "you";
+            using (var call = client.CallStream(new Empty(), Metadata.Empty, null, cts.Token))
+            {
+                var responseStream = call.ResponseStream;
+                while (await responseStream.MoveNext())
+                {
+                    Console.WriteLine(responseStream.Current.MessageTypeCase);
+                }
+            }
 
-            // var reply = await client.PlaceBetAsync(new Bet {Horse = "Ista", Amt = 10});
-            // Console.WriteLine("Greeting: " + reply.Status);
-            // var cts = new CancellationTokenSource();
-            // var st = client.RaceStatus(new Empty(), Metadata.Empty, null, cts.Token);
+            Console.WriteLine(reply.Status);
 
-            // while (await st.ResponseStream.MoveNext())
-            // {
-            //     //cts.Cancel(); // cancel when first response.
-            //     Console.WriteLine(st.ResponseStream.Current);
-            // }
             channel.ShutdownAsync().Wait();
             Console.WriteLine("Press any key to exit...");
             Console.ReadKey();

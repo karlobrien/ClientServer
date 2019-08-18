@@ -12,7 +12,19 @@ namespace Server.Grpc
             Console.WriteLine($"Request received!");
             await Task.Delay(TimeSpan.FromSeconds(2));
             return new ServerResponse();
-            //return new ServerResponse {status = MessageStatus.Ack};
+        }
+
+        public override async Task CallStream(Empty request, IServerStreamWriter<StreamUpdate> responseStream, ServerCallContext context)
+        {
+            for(var i = 0; i < 100; i++)
+            {
+                StreamUpdate st = new StreamUpdate();
+                if (i % 2 == 0)
+                    st.Pulse = new HeartBeat { Tick = new Timestamp()};
+                else
+                    st.Price = new Price {Symbol = "VOD LN", RefPrice = 10};
+                await responseStream.WriteAsync(st);
+            }
         }
     }
 }
