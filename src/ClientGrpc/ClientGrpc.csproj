@@ -2,8 +2,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Transport.Description\Transport.Description.csproj" />
-    <PackageReference Include="Google.Protobuf" Version="3.8.0" />
-    <PackageReference Include="Grpc" Version="1.21.0" />
+    <!-- <PackageReference Include="Google.Protobuf" Version="3.8.0" />
+    <PackageReference Include="Grpc" Version="1.21.0" /> -->
   </ItemGroup>
 
   <PropertyGroup>
