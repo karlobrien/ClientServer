@@ -23,7 +23,8 @@ namespace Server.Grpc
                     st.Pulse = new HeartBeat { Tick = new Timestamp()};
                 else
                     st.Price = new Price {Symbol = "VOD LN", RefPrice = 10};
-                await responseStream.WriteAsync(st);
+                if (!context.CancellationToken.IsCancellationRequested)
+                    await responseStream.WriteAsync(st);
             }
         }
     }
